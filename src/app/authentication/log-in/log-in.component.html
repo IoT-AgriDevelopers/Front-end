@@ -1,0 +1,41 @@
+<div class="bg-container">
+  <div class="form-container">
+    <mat-card>
+      <mat-card-header>
+        <div class="logo-container">
+          <img class="logo" src="/assets/logo.png" alt="logo">
+          <mat-card-title>AgriPure</mat-card-title>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="btn-container">
+          <a mat-flat-button color="basic" routerLink="/accounts/login" routerLinkActive="active" type="button">
+            Log in
+          </a>
+          <a mat-flat-button color="basic" routerLink="/accounts/register" routerLinkActive="active" type="button">
+            Sign up
+          </a>
+        </div>
+        <form [formGroup]="loginForm" (submit)="submitForm()">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" spellcheck="false" [formControl]="loginForm.controls.email">
+            <mat-error *ngIf="loginForm.controls.email.invalid"> {{getErrorEmailMessage()}} </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" spellcheck="false"
+              [formControl]="loginForm.controls.password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.controls.password.invalid">{{getErrorPasswordMessage()}}</mat-error>
+          </mat-form-field>
+          <button mat-flat-button color="basic" type="submit" (click)="submitForm()" [disabled]="loginForm.invalid">Submit</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
